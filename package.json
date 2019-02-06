@@ -1,0 +1,11 @@
+{
+  "name": "cr2-raw",
+  "version": "0.1.0",
+  "description": "Read Canon CR2 files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENCED"
+}
