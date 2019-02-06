@@ -1,2 +1,5 @@
+# Node modules.
+node_modules/
+
 # Ignore .CR2 files as they are most likely test data.
 *.CR2
