@@ -1,0 +1,10 @@
+# EditorConfig
+# http://editorconfig.org
+
+# This is the root config file.
+root = true
+
+# For all JavaScript files.
+[*.js]
+indent_style = space
+indent_size = 2
