@@ -1,0 +1,2 @@
+# Ignore .CR2 files as they are most likely test data.
+*.CR2
