@@ -1,68 +1,58 @@
 'use stict';
 
-const utils = require('./utils');
+const fs = require('fs');
 
-function read(buffer, offset, size, count) {
+const dataTypes = require('./data-types'),
+  utils = require('./utils');
 
-  let ta;
+function init(filePath) {
 
-  offset = offset * 2;
+  let data;
 
-  switch (size) {
-    case 8:
-      ta = new Uint8Array(buffer, offset, count);
-      break;
-    case 16:
-      ta = new Uint16Array(buffer, offset, count);
-      break;
-    case 32:
-      ta = new Uint32Array(buffer, offset, count);
-      break;
-    default:
-      throw 'Oh shit!';
+  // Read entire file.
+  data = fs.readFileSync(filePath);
+
+  function read(offset, type, count) {
+
+    const arrayBuffer = fillBuffer(offset, type.bytes * count);
+
+    let value = type.getValue(arrayBuffer);
+
+    return value;
   }
 
-  utils.arrayAsHex(ta);
+  function readRaw(offset, count) {
 
-  return ta;
-}
+    let newData = [];
+    let pos = 0;
 
-function readString(buffer, offset, length) {
+    for (let i = offset; i < offset + count; i++) {
+      newData[pos] = data[i];
+      pos++;
+    }
 
-  let ta = read(buffer, offset, 8, length);
-  let str = '';
-
-  for (let i = 0; i < ta.length; i++) {
-    str = `${str}${String.fromCharCode(ta[i])}`;
+    return newData;
   }
-  console.log(str);
-  return str;
+
+  function fillBuffer(offset, size) {
+
+    const arrayBuffer = new ArrayBuffer(size);
+
+    let ta = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < ta.length; i++) {
+      ta[i] = data[offset + i];
+    }
+
+    //utils.arrayAsHex(ta);
+
+    return arrayBuffer;
+  }
+
+  return {
+    read: read,
+    readRaw: readRaw
+  }
 }
 
-function readLong(buffer, offset) {
-
-  let ta = read(buffer, offset, 32, 1);
-  let long;
-
-  long = parseInt(ta[0]);
-
-  console.log(long);
-  return long;
-}
-
-function readShort(buffer, offset) {
-
-  let ta = read(buffer, offset, 16, 1);
-  let short;
-
-  short = parseInt(ta[0]);
-
-  console.log(short);
-  return short;
-}
-
-module.exports = {
-  readString: readString,
-  readLong: readLong,
-  readShort: readShort
-};
+module.exports = init;

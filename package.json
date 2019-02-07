@@ -10,5 +10,8 @@
   "license": "UNLICENCED",
   "devDependencies": {
     "gulp": "^4.0.0"
+  },
+  "dependencies": {
+    "sharp": "^0.21.3"
   }
 }
