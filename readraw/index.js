@@ -1,38 +1,70 @@
 'use strict';
 
 const bufferFile = require('./buffer-file'),
-  readBuffer = require('./read-buffer');
+  readBuffer = require('./read-buffer'),
+  dataTypes = require('./data-types');
 
 function readraw(filePath) {
 
-  let buffer;
+  const buffer = readBuffer(filePath);
 
-  bufferFile(filePath, (err, ab) => {
-    buffer = ab;
-    parse();
-  });
+  const ifdZeroOffset = buffer.read(4, dataTypes.types.ulong, 1);
 
-  function parse() {
+  readIfd(ifdZeroOffset);
 
-    // Read endianess.
-    readBuffer.readString(buffer, 0, 2);
+  function readIfd(offset) {
+    const entries = buffer.read(ifdZeroOffset, dataTypes.types.ushort, 1);
 
-    // Read offset to IFD#0.
-    const ifdZeroOffset = readBuffer.readLong(buffer, 2);
+    const entryLength = 12;
+    const firstOffset = offset + (dataTypes.types.ushort.bytes * 1);
 
-    readIfd(ifdZeroOffset);
-  }
+    for (let i = 0; i < entries; i++) {
 
-  function readIfd(ifdOffset) {
+      const entry = {};
 
-    const offset = ifdOffset / 2;
+      const entryOffset = firstOffset + (entryLength * i);
+      let readOffset = 0;
 
-    const tagId = readBuffer.readShort(buffer, offset + 7);
-    const tagType = readBuffer.readShort(buffer, offset + 8);
-    const count = readBuffer.readLong(buffer, offset + 9);
-    const tagValue = readBuffer.readShort(buffer, offset + 11);
+      entry.tagId = buffer.read(
+        entryOffset,
+        dataTypes.types.ushort,
+        1);
+      readOffset += 2;
 
-    console.log(tagValue * 2);
+      entry.tagType = buffer.read(
+        entryOffset + readOffset,
+        dataTypes.types.ushort,
+        1);
+      readOffset += 2;
+
+      entry.tagCount = buffer.read(
+        entryOffset + readOffset,
+        dataTypes.types.ulong,
+        1);
+      readOffset += 4;
+
+      entry.tagValue = buffer.read(
+        entryOffset + readOffset,
+        dataTypes.types.ulong,
+        1);
+      readOffset += 4;
+
+      // If it's a string type.
+      if (entry.tagType === dataTypes.types.string.tiffType) {
+
+        entry.actualValue = buffer.read(
+          entry.tagValue,
+          dataTypes.typeFor(entry.tagType),
+          entry.tagCount);
+      }
+
+      // Is it the image data?
+      if (entry.tagId === 273) {
+        console.log('Read image data!');
+      }
+
+      console.log (entry);
+    }
   }
 }
 
