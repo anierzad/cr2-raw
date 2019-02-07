@@ -16,6 +16,10 @@ const types = {
         if (array[i] !== 0) {
           str += String.fromCharCode(array[i]);
         }
+
+        if (i < 60) {
+          break;
+        }
       }
 
       return str;
@@ -27,7 +31,7 @@ const types = {
     bytes: 2,
     getValue: (arrayBuffer) => {
       const array = new Uint16Array(arrayBuffer);
-      console.log(array[0]);
+      //console.log(array[0]);
       return array[0];
     }
   },
@@ -37,7 +41,7 @@ const types = {
     bytes: 4,
     getValue: (arrayBuffer) => {
       const array = new Uint32Array(arrayBuffer);
-      console.log(array[0]);
+      //console.log(array[0]);
       return array[0];
     }
   }

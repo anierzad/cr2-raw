@@ -21,6 +21,19 @@ function init(filePath) {
     return value;
   }
 
+  function readRaw(offset, count) {
+
+    let newData = [];
+    let pos = 0;
+
+    for (let i = offset; i < offset + count; i++) {
+      newData[pos] = data[i];
+      pos++;
+    }
+
+    return newData;
+  }
+
   function fillBuffer(offset, size) {
 
     const arrayBuffer = new ArrayBuffer(size);
@@ -31,13 +44,14 @@ function init(filePath) {
       ta[i] = data[offset + i];
     }
 
-    utils.arrayAsHex(ta);
+    //utils.arrayAsHex(ta);
 
     return arrayBuffer;
   }
 
   return {
-    read: read
+    read: read,
+    readRaw: readRaw
   }
 }
 
