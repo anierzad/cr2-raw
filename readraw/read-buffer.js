@@ -21,14 +21,12 @@ function init(filePath) {
     return value;
   }
 
-  function readRaw(offset, count) {
+  function copy(offset, count) {
 
     let newData = [];
-    let pos = 0;
 
-    for (let i = offset; i < offset + count; i++) {
-      newData[pos] = data[i];
-      pos++;
+    for (let i = 0, p = offset; i < count; i++, p++) {
+      newData[i] = data[p];
     }
 
     return newData;
@@ -51,7 +49,7 @@ function init(filePath) {
 
   return {
     read: read,
-    readRaw: readRaw
+    copy: copy
   }
 }
 

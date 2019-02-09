@@ -8,4 +8,6 @@ const readraw = require('./readraw');
 // Get the path of the file.
 const filePath = path.resolve('test.CR2');
 
-readraw(filePath);
+const raw = readraw(filePath);
+
+raw.getPreview();
