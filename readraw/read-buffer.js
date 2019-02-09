@@ -2,8 +2,7 @@
 
 const fs = require('fs');
 
-const dataTypes = require('./data-types'),
-  utils = require('./utils');
+const dataTypes = require('./data-types');
 
 function init(filePath) {
 
@@ -41,8 +40,6 @@ function init(filePath) {
     for (let i = 0; i < ta.length; i++) {
       ta[i] = data[offset + i];
     }
-
-    //utils.arrayAsHex(ta);
 
     return arrayBuffer;
   }

@@ -1,14 +1,11 @@
 'use strict';
 
 const fs = require('fs'),
-  path = require('path'),
-  sharp = require('sharp'),
-  util = require('util');
+  path = require('path');
 
 const bufferFile = require('./buffer-file'),
   readBuffer = require('./read-buffer'),
-  dataTypes = require('./data-types'),
-  utils = require('./utils');
+  dataTypes = require('./data-types');
 
 function readraw(filePath) {
 
