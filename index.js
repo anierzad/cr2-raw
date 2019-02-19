@@ -18,40 +18,28 @@ function init(filePath) {
   function previewImage() {
 
     const stripOffsetTag = 0x0111;
+    const stripByteCountsTag = 0x0117;
 
     let offset;
+    let length;
 
     if (raw.ifds[0]
-      && raw.ifds[0][stripOffsetTag]
-      && raw.ifds[0][stripOffsetTag].tagValue) {
+      && raw.ifds[0][stripOffsetTag]) {
 
       offset = raw.ifds[0][stripOffsetTag].tagValue;
     }
 
-    if (!offset) {
+    if (raw.ifds[0]
+      && raw.ifds[0][stripByteCountsTag]) {
+
+      length = raw.ifds[0][stripByteCountsTag].tagValue;
+    }
+
+    if (!offset || !length) {
       return null;
     }
 
-    let end;
-    let testPos = offset;
-
-    while (!end) {
-
-      const testA = buffer.read(testPos, dataTypes.types.ubyte, 1);
-      const testB = buffer.read(testPos + 1, dataTypes.types.ubyte, 1);
-
-      if (testA === 0xff && testB === 0xd9) {
-
-        end = testPos;
-        break;
-      }
-
-      testPos++;
-    }
-
-    end = end + 2;
-
-    const imgData = buffer.copy(offset, end - offset);
+    const imgData = buffer.copy(offset, length);
 
     return Buffer.from(imgData);
   }
