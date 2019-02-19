@@ -21,7 +21,7 @@ function runTask(cb) {
     }
 
     // Launch new process.
-    runningProcess = spawn('node', ['index.js'], { stdio: 'inherit' });
+    runningProcess = spawn('node', ['test.js'], { stdio: 'inherit' });
 
     // Attach handling in case the process crashes.
     runningProcess.on('close', function (exitCode) {

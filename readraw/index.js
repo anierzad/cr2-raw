@@ -3,17 +3,13 @@
 const fs = require('fs'),
   path = require('path');
 
-const bufferFile = require('./buffer-file'),
-  readBuffer = require('./read-buffer'),
-  dataTypes = require('./data-types');
+const dataTypes = require('../read-buffer/data-types');
 
-function readraw(filePath) {
+function readraw(buffer) {
 
   const rawData = {
     ifds: {}
   };
-
-  const buffer = readBuffer(filePath);
 
   // Get offset to IFD#0;
   let ifdOffset = buffer.read(4, dataTypes.types.ulong, 1);

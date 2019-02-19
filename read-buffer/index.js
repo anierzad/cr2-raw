@@ -2,8 +2,6 @@
 
 const fs = require('fs');
 
-const dataTypes = require('./data-types');
-
 function init(filePath) {
 
   let data;
