@@ -7,6 +7,6 @@ const raw = require('.');
 
 const filePath = path.resolve('test.CR2');
 
-const previewImageData = raw(filePath).previewImage();
+fs.writeFileSync('test-preview.jpg', raw(filePath).previewImage());
 
-fs.writeFileSync('test.jpg', previewImageData);
+fs.writeFileSync('test-thumbnail.jpg', raw(filePath).thumbnailImage());

@@ -23,19 +23,57 @@ function init(filePath) {
     let offset;
     let length;
 
-    if (raw.ifds[0]
-      && raw.ifds[0][stripOffsetTag]) {
+    const ifd = raw.ifds[0];
 
-      offset = raw.ifds[0][stripOffsetTag].tagValue;
+    // Retrieve offset.
+    if (ifd && ifd[stripOffsetTag]) {
+
+      offset = ifd[stripOffsetTag].tagValue;
     }
 
-    if (raw.ifds[0]
-      && raw.ifds[0][stripByteCountsTag]) {
+    // Retrieve length.
+    if (ifd && ifd[stripByteCountsTag]) {
 
-      length = raw.ifds[0][stripByteCountsTag].tagValue;
+      length = ifd[stripByteCountsTag].tagValue;
     }
 
+    // Have offset and length?
     if (!offset || !length) {
+
+      return null;
+    }
+
+    const imgData = buffer.copy(offset, length);
+
+    return Buffer.from(imgData);
+  }
+
+  // Retrieve the image thumbnail.
+  function thumbnailImage() {
+
+    const stripOffsetTag = 0x0201;
+    const stripByteCountsTag = 0x0202;
+
+    let offset;
+    let length;
+
+    const ifd = raw.ifds[1];
+
+    // Retrieve offset.
+    if (ifd && ifd[stripOffsetTag]) {
+
+      offset = ifd[stripOffsetTag].tagValue;
+    }
+
+    // Retrieve length.
+    if (ifd && ifd[stripByteCountsTag]) {
+
+      length = ifd[stripByteCountsTag].tagValue;
+    }
+
+    // Have offset and length?
+    if (!offset || !length) {
+
       return null;
     }
 
@@ -45,7 +83,8 @@ function init(filePath) {
   }
 
   return {
-    previewImage: previewImage
+    previewImage: previewImage,
+    thumbnailImage: thumbnailImage
   };
 }
 
