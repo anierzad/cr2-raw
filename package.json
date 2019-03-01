@@ -1,15 +1,26 @@
 {
   "name": "cr2-raw",
-  "version": "0.1.0",
-  "description": "Read Canon CR2 files.",
+  "version": "1.0.0",
+  "description": "Native image and meta data retrieval from Canon RAW .CR2 files.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "UNLICENCED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anierzad/cr2-raw.git"
+  },
+  "keywords": [
+    "raw",
+    "cr2"
+  ],
+  "author": "Adam Nierzad (http://www.adamnierzad.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anierzad/cr2-raw/issues"
+  },
+  "homepage": "https://github.com/anierzad/cr2-raw#readme",
   "devDependencies": {
     "gulp": "^4.0.0"
-  },
-  "dependencies": {}
+  }
 }
