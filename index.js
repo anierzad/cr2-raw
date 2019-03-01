@@ -82,9 +82,77 @@ function init(filePath) {
     return Buffer.from(imgData);
   }
 
+  function unk1Image() {
+
+    const stripOffsetTag = 0x0111;
+    const stripByteCountsTag = 0x0117;
+
+    let offset;
+    let length;
+
+    const ifd = raw.ifds[2];
+
+    // Retrieve offset.
+    if (ifd && ifd[stripOffsetTag]) {
+
+      offset = ifd[stripOffsetTag].tagValue;
+    }
+
+    // Retrieve length.
+    if (ifd && ifd[stripByteCountsTag]) {
+
+      length = ifd[stripByteCountsTag].tagValue;
+    }
+
+    // Have offset and length?
+    if (!offset || !length) {
+
+      return null;
+    }
+
+    const imgData = buffer.copy(offset, length);
+
+    return Buffer.from(imgData);
+  }
+
+  function unk2Image() {
+
+    const stripOffsetTag = 0x0111;
+    const stripByteCountsTag = 0x0117;
+
+    let offset;
+    let length;
+
+    const ifd = raw.ifds[3];
+
+    // Retrieve offset.
+    if (ifd && ifd[stripOffsetTag]) {
+
+      offset = ifd[stripOffsetTag].tagValue;
+    }
+
+    // Retrieve length.
+    if (ifd && ifd[stripByteCountsTag]) {
+
+      length = ifd[stripByteCountsTag].tagValue;
+    }
+
+    // Have offset and length?
+    if (!offset || !length) {
+
+      return null;
+    }
+
+    const imgData = buffer.copy(offset, length);
+
+    return Buffer.from(imgData);
+  }
+
   return {
     previewImage: previewImage,
-    thumbnailImage: thumbnailImage
+    thumbnailImage: thumbnailImage,
+    unk1Image: unk1Image,
+    unk2Image: unk2Image
   };
 }
 
