@@ -1,6 +1,9 @@
 # Node modules.
 node_modules/
 
+# Test coverage output.
+coverage/
+
 # Ignore .CR2 files as they are most likely test data.
 *.CR2
 
