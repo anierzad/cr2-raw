@@ -4,7 +4,7 @@
   "description": "Native image and meta data retrieval from Canon RAW .CR2 files.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --colors --verbose --coverage"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/anierzad/cr2-raw#readme",
   "devDependencies": {
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.0",
+    "jest": "^24.5.0",
+    "md5": "^2.2.1"
   }
 }

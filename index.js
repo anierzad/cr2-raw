@@ -23,7 +23,13 @@ function init(filePath) {
     let offset;
     let length;
 
-    const ifd = raw.ifds[0];
+    let ifd;
+
+    // Retrieve relevant ifd.
+    if (raw.ifds) {
+
+      ifd = raw.ifds[0];
+    }
 
     // Retrieve offset.
     if (ifd && ifd[stripOffsetTag]) {
@@ -57,7 +63,13 @@ function init(filePath) {
     let offset;
     let length;
 
-    const ifd = raw.ifds[1];
+    let ifd;
+
+    // Retrieve relevant ifd.
+    if (raw.ifds) {
+
+      ifd = raw.ifds[1];
+    }
 
     // Retrieve offset.
     if (ifd && ifd[stripOffsetTag]) {

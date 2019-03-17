@@ -11,6 +11,17 @@ function readraw(buffer) {
     ifds: {}
   };
 
+  // Verify format.
+  const canonRawMarker = buffer.read(8, dataTypes.types.string, 2);
+  const canonRawVersion = buffer.read(10, dataTypes.types.ushort, 1);
+
+  if (canonRawMarker !== 'CR'
+    || canonRawVersion !== 2) {
+
+    // It's not CR2, stop.
+    return {};
+  }
+
   // Get offset to IFD#0;
   let ifdOffset = buffer.read(4, dataTypes.types.ulong, 1);
   let ifdCount = 0;
