@@ -22,6 +22,7 @@
   "homepage": "https://github.com/anierzad/cr2-raw#readme",
   "devDependencies": {
     "gulp": "^4.0.0",
-    "jest": "^24.5.0"
+    "jest": "^24.5.0",
+    "md5": "^2.2.1"
   }
 }
