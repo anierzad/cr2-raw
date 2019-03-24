@@ -21,7 +21,7 @@ fs.writeFileSync('my-image.jpg', raw.previewImage());
 ### cr2raw
 
 #### Static
-#### `definitions`
+#### `meta`
 MetaDefinitions describe how to find a specific tag including the tagId, which
 IFD's to search for it and a parse function to use on the return value.
 
@@ -36,6 +36,12 @@ returns it as an `int`.
 ###### Description
 Retrieves '[Exif.Photo.PixelYDimension][exiv2-tags]' from the EXIF IFD and
 returns it as an `int`.
+
+##### `DateTaken`
+
+###### Description
+Retrieves '[Exif.Photo.DateTimeOriginal][exiv2-tags]' from the EXIF IFD and
+returns it as a `Date`.
 
 #### Construction
 #### `cr2Raw(filePath)`
