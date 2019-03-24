@@ -78,18 +78,6 @@ test('definition has no ifd', () => {
   expect(actual).toBe(12345);
 });
 
-test('defines width', () => {
-
-  const widthTag = 0xa002;
-  const widthIfd = 'exif';
-
-  const actual = metaData.definitions.ImageWidth;
-
-  expect(actual).toBeDefined();
-  expect(actual.tagId).toBe(widthTag);
-  expect(actual.ifd).toBe(widthIfd);
-});
-
 test('fetch width', () => {
 
   const testWidth = 1280;
@@ -106,18 +94,6 @@ test('fetch width', () => {
   const actual = metaData.fetch(testRaw, metaData.definitions.ImageWidth);
 
   expect(actual).toBe(testWidth);
-});
-
-test('defines height', () => {
-
-  const heightTag = 0xa003;
-  const heightIfd = 'exif';
-
-  const actual = metaData.definitions.ImageHeight;
-
-  expect(actual).toBeDefined();
-  expect(actual.tagId).toBe(heightTag);
-  expect(actual.ifd).toBe(heightIfd);
 });
 
 test('fetch height', () => {
