@@ -3,14 +3,14 @@
 const definitions = {
 
   ImageWidth: {
-    tagId: 0x0100,
-    ifd: 0,
+    tagId: 0xa002,
+    ifd: 'exif',
     parse: parseInt
   },
 
   ImageHeight: {
-    tagId: 0x0101,
-    ifd: 0,
+    tagId: 0xa003,
+    ifd: 'exif',
     parse: parseInt
   }
 };
