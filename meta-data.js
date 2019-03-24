@@ -4,12 +4,21 @@ const definitions = {
 
   ImageWidth: {
     tagId: 0xa002,
+    tagType: 4,
     ifd: 'exif',
     parse: parseInt
   },
 
   ImageHeight: {
     tagId: 0xa003,
+    tagType: 4,
+    ifd: 'exif',
+    parse: parseInt
+  }
+
+  DateTaken: {
+    tagId: 0xa003,
+    tagType: 2,
     ifd: 'exif',
     parse: parseInt
   }
@@ -37,7 +46,16 @@ function fetch(raw, metaDefinition) {
 
     if (tag && tag.tagValue) {
 
+      // Use tagValue by default.
       result = tag.tagValue;
+
+      // Is it a string?
+      if (metaDefinition.tagType === 2) {
+
+        // Use actualValue instead.
+        result = tag.actualValue;
+      }
+
       break;
     }
   }
