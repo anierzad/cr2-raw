@@ -1,6 +1,8 @@
 'use strict';
 
-const metaData = require('../meta-data');
+const moment = require('moment');
+
+const metaData = require('../../meta-data');
 
 test('fetch fail, no ifd', () => {
 
@@ -56,6 +58,98 @@ test('fetch integer, stored as string', () => {
   const actual = metaData.fetch(testRaw, metaData.definitions.ImageWidth);
 
   expect(actual).toBe(12345);
+});
+
+test('fetch date, stored as string', () => {
+
+  const testDate = moment().milliseconds(0);
+  const dateStr = testDate.format('YYYY:MM:DD HH:mm:ss');
+  const testRaw = {
+    ifds: {
+      exif: {
+        0x9003: {
+          tagValue: -1, // Not used, but should be there.
+          actualValue: dateStr
+        }
+      }
+    }
+  };
+
+  const actual = metaData.fetch(testRaw, metaData.definitions.DateTaken);
+
+  expect(actual).toEqual(testDate.toDate());
+});
+
+test('fetch date, stored as string, empty result', () => {
+
+  const testRaw = {
+    ifds: {
+      exif: {
+        0x9003: {
+          tagValue: -1, // Not used, but should be there.
+          actualValue: ''
+        }
+      }
+    }
+  };
+
+  const actual = metaData.fetch(testRaw, metaData.definitions.DateTaken);
+
+  expect(actual).toBeUndefined();
+});
+
+test('fetch date, stored as string, unexpected result', () => {
+
+  const testRaw = {
+    ifds: {
+      exif: {
+        0x9003: {
+          tagValue: -1, // Not used, but should be there.
+          actualValue: 'Cheese is not a crime.'
+        }
+      }
+    }
+  };
+
+  const actual = metaData.fetch(testRaw, metaData.definitions.DateTaken);
+
+  expect(actual).toBeUndefined();
+});
+
+test('fetch date, stored as string, bad date format', () => {
+
+  const testRaw = {
+    ifds: {
+      exif: {
+        0x9003: {
+          tagValue: -1, // Not used, but should be there.
+          actualValue: '12345 12:00:00'
+        }
+      }
+    }
+  };
+
+  const actual = metaData.fetch(testRaw, metaData.definitions.DateTaken);
+
+  expect(actual).toBeUndefined();
+});
+
+test('fetch date, stored as string, bad time format', () => {
+
+  const testRaw = {
+    ifds: {
+      exif: {
+        0x9003: {
+          tagValue: -1, // Not used, but should be there.
+          actualValue: '2000:01:01 12345'
+        }
+      }
+    }
+  };
+
+  const actual = metaData.fetch(testRaw, metaData.definitions.DateTaken);
+
+  expect(actual).toBeUndefined();
 });
 
 test('definition has no ifd', () => {
