@@ -18,7 +18,7 @@ const definitions = {
 function fetch(raw, metaDefinition) {
 
   let result;
-  let searchIfds = [0, 1, 2, 3];
+  let searchIfds = ['0', '1', '2', '3', 'exif'];
 
   // IFD specified?
   if (metaDefinition.ifd !== undefined) {
@@ -28,7 +28,9 @@ function fetch(raw, metaDefinition) {
   }
 
   // Loop search IFDs.
-  for (let ifdId in searchIfds) {
+  for (let i = 0; i < searchIfds.length; i++) {
+
+    const ifdId = searchIfds[i];
 
     const ifd = getIfd(raw, ifdId);
     const tag = getTag(ifd, metaDefinition.tagId);

@@ -41,7 +41,10 @@ function readraw(buffer) {
   // Read IFD#3.
   ifdOffset = readIfd(ifdOffset, ifdCount);
 
-  function readIfd(offset, number) {
+  // Read EXIF Sub-IFD.
+  readIfd(rawData.ifds['0'][0x8769].tagValue, 'exif');
+
+  function readIfd(offset, propName) {
 
     const ifdData = {};
 
@@ -106,7 +109,7 @@ function readraw(buffer) {
       ifdData['' + entry.tagId] = entry;
     }
 
-    rawData.ifds['' + number] = ifdData;
+    rawData.ifds['' + propName] = ifdData;
 
     return nextIfd;
   }
