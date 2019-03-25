@@ -4,7 +4,8 @@
   "description": "Native image and meta data retrieval from Canon RAW .CR2 files.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --colors --verbose --coverage"
+    "test": "jest --colors --verbose --coverage",
+    "preversion": "npm run test"
   },
   "repository": {
     "type": "git",
