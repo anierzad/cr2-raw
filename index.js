@@ -3,10 +3,10 @@
 const fs = require('fs'),
   path = require('path');
 
-const readraw = require('./readraw'),
-  readBuffer = require('./read-buffer'),
-  dataTypes = require('./read-buffer/data-types'),
-  metaData = require('./meta-data');
+const readraw = require('./src/readraw'),
+  readBuffer = require('./src/read-buffer'),
+  dataTypes = require('./src/read-buffer/data-types'),
+  metaData = require('./src/meta-data');
 
 function init(filePath) {
 

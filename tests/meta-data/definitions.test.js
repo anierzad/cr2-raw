@@ -1,6 +1,6 @@
 'use strict';
 
-const definitions = require('../../meta-data/definitions')
+const definitions = require('../../src/meta-data/definitions')
 
 test('defines ImageWidth', () => {
 

@@ -3,8 +3,8 @@
 const fs = require('fs'),
   path = require('path');
 
-const readBuffer = require('../../read-buffer'),
-  dataTypes = require('../../read-buffer/data-types');
+const readBuffer = require('../../src/read-buffer'),
+  dataTypes = require('../../src/read-buffer/data-types');
 
 const testIterations = 5;
 
