@@ -5,7 +5,8 @@ const fs = require('fs'),
 
 const readraw = require('./readraw'),
   readBuffer = require('./read-buffer'),
-  dataTypes = require('./read-buffer/data-types');
+  dataTypes = require('./read-buffer/data-types'),
+  metaData = require('./meta-data');
 
 function init(filePath) {
 
@@ -94,10 +95,18 @@ function init(filePath) {
     return Buffer.from(imgData);
   }
 
+  function fetchMeta(metaDefinition) {
+
+    return metaData.fetch(raw, metaDefinition);
+  }
+
   return {
     previewImage: previewImage,
-    thumbnailImage: thumbnailImage
+    thumbnailImage: thumbnailImage,
+    fetchMeta: fetchMeta
   };
 }
+
+init.meta = metaData.definitions;
 
 module.exports = init;
