@@ -1,6 +1,6 @@
 {
   "name": "cr2-raw",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Native image and meta data retrieval from Canon RAW .CR2 files.",
   "main": "index.js",
   "scripts": {
