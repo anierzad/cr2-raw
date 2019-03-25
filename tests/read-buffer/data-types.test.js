@@ -1,6 +1,6 @@
 'use strict';
 
-const dataTypes = require('../../read-buffer/data-types');
+const dataTypes = require('../../src/read-buffer/data-types');
 
 test('get type for TIFF type 1', () => {
 

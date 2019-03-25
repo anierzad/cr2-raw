@@ -2,7 +2,7 @@
 
 const moment = require('moment');
 
-const metaData = require('../../meta-data');
+const metaData = require('../../src/meta-data');
 
 test('fetch fail, no ifd', () => {
 
