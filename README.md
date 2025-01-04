@@ -37,6 +37,13 @@ returns it as an `int`.
 Retrieves '[Exif.Photo.PixelYDimension][exiv2-tags]' from the EXIF IFD and
 returns it as an `int`.
 
+##### `Orientation`
+
+###### Description
+Retrieves '[Exif.Photo.Orientation][exiv2-tags]' from the EXIF IFD and
+returns it as an `int`. (Values from 1 to 8)
+
+
 ##### `DateTaken`
 
 ###### Description

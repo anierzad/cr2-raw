@@ -21,6 +21,13 @@ const definitions = {
     tagType: 2,
     ifd: 'exif',
     parse: parseExifDate
+  },
+
+  Orientation: {
+    tagId: 0x0112,
+    tagType: 3,
+    ifd: '0',
+    parse: parseInt
   }
 };
 

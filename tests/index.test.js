@@ -5,6 +5,8 @@ const path = require('path'),
   moment = require('moment');
 
 const cr2Raw = require('../');
+const metaData = require('../src/meta-data');
+const exifValues = require('../src/meta-data/exifValues');
 
 test('extract preview image from _MG_4122.CR2', () => {
 
@@ -169,6 +171,28 @@ test('fetch date taken from _MG_8367.CR2', () => {
   const result = raw.fetchMeta(cr2Raw.meta.DateTaken);
 
   expect(result).toEqual(dateTaken.toDate());
+});
+
+test('fetch orientation taken from _MG_8367.CR2', () => {
+
+const orientationTaken = exifValues.EXIF_ORIENTATION.ROTATE_0;
+  const cr2Path = path.resolve(__dirname, 'res', '_MG_8367.CR2');
+
+  const raw = cr2Raw(cr2Path);
+  const result = raw.fetchMeta(cr2Raw.meta.Orientation);
+
+  expect(result).toEqual(orientationTaken);
+});
+
+test('fetch orientation taken from _MG_0081.CR2', () => {
+
+  const orientationTaken = exifValues.EXIF_ORIENTATION.ROTATE_90;
+  const cr2Path = path.resolve(__dirname, 'res', '_MG_0081.CR2');
+
+  const raw = cr2Raw(cr2Path);
+  const result = raw.fetchMeta(cr2Raw.meta.Orientation);
+
+  expect(result).toEqual(orientationTaken);
 });
 
 test('extract preview image from notraw.jpg', () => {

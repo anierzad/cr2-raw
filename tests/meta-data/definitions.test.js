@@ -43,3 +43,17 @@ test('defines DateTaken', () => {
   expect(actual.tagType).toBe(tagType);
   expect(actual.ifd).toBe(ifd);
 });
+
+test('defines Orientation', () => {
+
+  const tagId = 0x0112;
+  const tagType = 3;
+  const ifd = '0';
+
+  const actual = definitions.Orientation;
+
+  expect(actual).toBeDefined();
+  expect(actual.tagId).toBe(tagId);
+  expect(actual.tagType).toBe(tagType);
+  expect(actual.ifd).toBe(ifd);
+});

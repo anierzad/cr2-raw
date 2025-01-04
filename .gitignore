@@ -6,3 +6,6 @@ coverage/
 
 # Misc.
 .DS_Store
+
+# VS Code
+.vscode/

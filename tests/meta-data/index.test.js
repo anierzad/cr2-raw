@@ -3,6 +3,7 @@
 const moment = require('moment');
 
 const metaData = require('../../src/meta-data');
+const { Orientation } = require('../../src/meta-data/definitions');
 
 test('fetch fail, no ifd', () => {
 
@@ -206,4 +207,20 @@ test('fetch height', () => {
   const actual = metaData.fetch(testRaw, metaData.definitions.ImageHeight);
 
   expect(actual).toBe(testHeight);
+});
+
+test('fetch orientation', () => {
+
+  const testOrientation = 1;
+  const testRaw = {
+    ifds: {
+      '0': {
+        0x0112: {
+          tagValue: 1
+        }
+      }
+    }
+  };
+  const actual = metaData.fetch(testRaw, metaData.definitions.Orientation);
+  expect(actual).toBe(testOrientation);
 });
